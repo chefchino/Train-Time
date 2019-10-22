@@ -52,7 +52,7 @@ database.ref().on("child_added",function(childSnapshot){
     var firstTrain= moment(startTime,"HH:mm")
     var now= moment()
     var diff= now.diff(firstTrain,'minutes');
-    var sinceLast= diff%frequency
+    var sinceLast= diff%frequency;
     var minutesAway= frequency-sinceLast;
     var nextArrival= now.add(minutesAway, 'minutes').format('h:mm a');
 
@@ -72,16 +72,30 @@ database.ref().on("child_added",function(childSnapshot){
     // var trainTime= moment.minutes(time).format('LT');
 
     // console.log(trainTime);
+    var rowCount= 0;
+    var close= $("<button>");
 
-    var newRow= $("<tr>").append(
+    close.attr("data-trainTable", childSnapshot.key);
+    close.addClass("checkbox");
+    close.text("X");
+    rowCount++;
+
+     var newRow= $("<tr>").attr("data-trainTable", childSnapshot.key).append(
         $("<td>").text(tName),
         $("<td>").text(destination),
         $("<td>").text(frequency),
         $("<td>").text(nextArrival),
         $("<td>").text(minutesAway)
-        
+    
     );
+    newRow= newRow.prepend(close);
+    console.log(newRow);
     $("#trainTable > tbody").append(newRow);
+});
+
+$(document.body).on("click", ".checkbox", function(){
+    var closeBox = $(this).attr("data-trainTable");
+    $("[data-trainTable='" + closeBox +"']").remove();
 });
 
 //   firebase.analytics();
