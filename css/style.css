@@ -1,15 +1,25 @@
+.jumbotron{
+    background-color: lightblue;
+}
+
 .display-4{
     text-align: center;
     font-weight:bolder;
+    background-color: lightblue;
+    color: black;
 
 }
 .card-header, h6{
     background-color: blue;
     color: whitesmoke;
     font-weight:bolder;
+    text-align: center;
 }
 .form-group{
     margin-left:250px;
     font-weight: bolder;
     width:900px;
+}
+.btn{
+    margin-left: 1050px;
 }
